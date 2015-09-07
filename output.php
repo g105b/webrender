@@ -1,6 +1,10 @@
 <?php
 if(!isset($_GET["url"])
 || !isset($_GET["qs"])) {
+	if(strstr($_SERVER["REQUEST_URI"], "&amp;")) {
+		$fixed = html_entity_decode($_SERVER["REQUEST_URI"]);
+		header("Location: $fixed");exit;
+	}
 	die("Invalid format");
 }
 
