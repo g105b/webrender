@@ -1,0 +1,11 @@
+{
+	"name": "webrender",
+	"author": "Greg Bowler (@g105b)",
+	"description": "Renders part of a webpage via CSS selector",
+	
+	"dependencies": {
+		"phantomjs": "1.9.*"
+	},
+
+	"license": "MIT"
+}
