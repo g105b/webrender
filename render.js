@@ -7,6 +7,7 @@ var
 	page = require("webpage").create(),
 	homePage = system.args[1],
 	selector = system.args[2],
+	output = system.args[3] || "output.png",
 $$;
 
 page.viewportSize = {
@@ -35,6 +36,6 @@ page.onLoadFinished = function(status) {
 	console.log("Status:  " + status);
 	console.log("Loaded:  " + url);
 
-	page.render("output.png");
+	page.render(output);
 	phantom.exit();
 };
