@@ -21,4 +21,6 @@ header("Content-Length: $fileSize");
 echo fread($fh, $fileSize);
 
 fclose($fh);
+unlink($filePath);
+
 exit;
