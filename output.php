@@ -18,13 +18,31 @@ exec("./node_modules/phantomjs/bin/phantomjs render.js "
 	. "$_GET[url] $_GET[qs] $filePath");
 
 $fileSize = filesize($filePath);
-$fh = fopen($filePath, "r");
 
 header("Content-Type: image/png");
 header("Content-Length: $fileSize");
-echo fread($fh, $fileSize);
 
-fclose($fh);
+$im = imagecreatefrompng($filePath);
+$size = getimagesize($filePath);
+$h = $size[1];
+
+if(isset($_GET["ratio"])) {
+	$col = imagecolorallocate($im, 9, 17, 53);
+	$h = $size[0] / $_GET["ratio"];
+	$canvas = imagecreatetruecolor($size[0], $h);
+	imagefill($canvas, 10, 10, $col);
+}
+else {
+	$canvas = imagecreatetruecolor($size[0], $size[1]);
+}
+
+$y = ($h / 2) - ($size[1] / 2);
+imagecopy($canvas, $im, 0, $y, 0, 0, $size[0], $size[1]);
+
+imagepng($canvas);
+imagedestroy($im);
+imagedestroy($canvas);
+
 unlink($filePath);
 
 exit;
