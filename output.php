@@ -17,6 +17,7 @@ chdir(__DIR__);
 exec("./node_modules/phantomjs/bin/phantomjs render.js "
 	. "$_GET[url] $_GET[qs] $filePath");
 
+sleep(3);
 $fileSize = filesize($filePath);
 
 header("Content-Type: image/png");
