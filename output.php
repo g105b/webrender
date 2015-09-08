@@ -21,7 +21,6 @@ sleep(3);
 $fileSize = filesize($filePath);
 
 header("Content-Type: image/png");
-header("Content-Length: $fileSize");
 
 $im = imagecreatefrompng($filePath);
 $size = getimagesize($filePath);
