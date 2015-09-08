@@ -2,7 +2,7 @@
  * Takes two arguments: URL and CSS selector, both mandatory.
  */
 
-var 
+var
 	system = require("system"),
 	page = require("webpage").create(),
 	homePage = system.args[1],
@@ -20,7 +20,7 @@ page.open(homePage);
 page.onLoadFinished = function(status) {
 	var url = page.url;
 
-	var clipRect = page.evaluate(function (selector) { 
+	var clipRect = page.evaluate(function (selector) {
 	        return document.querySelector(selector).getBoundingClientRect();
 	}, selector);
 
@@ -31,11 +31,14 @@ page.onLoadFinished = function(status) {
 		left:   clipRect.left,
 		width:  clipRect.width,
 		height: clipRect.height,
-        };
+    };
 
 	console.log("Status:  " + status);
 	console.log("Loaded:  " + url);
 
-	page.render(output);
-	phantom.exit();
+	setTimeout(function() {
+		page.render(output);
+		phantom.exit();
+	}, 2000);
+
 };
